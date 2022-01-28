@@ -2,12 +2,11 @@ import { LightningElement, api } from 'lwc';
 import { getSession } from 'data/sessionService';
 
 export default class SessionDetails extends LightningElement {
-    
     session;
     /**
      * We use the @api decorator to define the sessionId setter method as public.
-     * That way you can provide a sessionId as an attribute of the my-session-details tag. 
-     * Properties annotated with @api are reactive: when their value changes, 
+     * That way you can provide a sessionId as an attribute of the my-session-details tag.
+     * Properties annotated with @api are reactive: when their value changes,
      * the component is automatically rerendered.
      */
     @api
@@ -18,5 +17,14 @@ export default class SessionDetails extends LightningElement {
 
     get sessionId() {
         return this._sessionId;
+    }
+
+    handleSessionsClick() {
+        const navigateEvent = new CustomEvent('navigate', {
+            detail: {
+                state: 'list'
+            }
+        });
+        this.dispatchEvent(navigateEvent);
     }
 }
